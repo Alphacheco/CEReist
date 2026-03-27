@@ -22,6 +22,7 @@ document.querySelectorAll('.service-item, .profile-card__bio').forEach((element)
 const mobileQuery = window.matchMedia('(max-width: 480px)');
 const profileCard = document.querySelector('.profile-card');
 const profileToggle = document.querySelector('.profile-card__toggle');
+const profileDetails = document.querySelector('.profile-card__details');
 const profilePhoto = document.querySelector('.profile-card__photo');
 const footer = document.querySelector('.footer');
 const serviceItems = Array.from(document.querySelectorAll('.service-item'));
@@ -48,6 +49,26 @@ function setProfileExpanded(isExpanded) {
 
   profileCard.classList.toggle('is-expanded', isExpanded);
   profileToggle.setAttribute('aria-expanded', String(isExpanded));
+
+  if (profileDetails && mobileQuery.matches) {
+    profileDetails.style.maxHeight = isExpanded ? `${profileDetails.scrollHeight}px` : '0px';
+  }
+}
+
+function resetProfileDetailsStyles() {
+  if (!profileDetails) {
+    return;
+  }
+
+  profileDetails.style.maxHeight = '';
+}
+
+function refreshProfileDetailsHeight() {
+  if (!profileDetails || !mobileQuery.matches || !profileCard?.classList.contains('is-expanded')) {
+    return;
+  }
+
+  profileDetails.style.maxHeight = `${profileDetails.scrollHeight}px`;
 }
 
 function setServiceOpen(itemToOpen) {
@@ -98,6 +119,7 @@ function syncMobileState(event) {
   const isMobile = event.matches;
 
   if (!isMobile) {
+    resetProfileDetailsStyles();
     setProfileExpanded(true);
     resetServicePanelStyles();
     serviceItems.forEach((item) => {
@@ -147,5 +169,6 @@ mobileQuery.addEventListener('change', syncMobileState);
 mobileQuery.addEventListener('change', syncFooterOffset);
 window.addEventListener('resize', () => {
   syncFooterOffset();
+  refreshProfileDetailsHeight();
   refreshOpenServiceHeight();
 });
