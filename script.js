@@ -53,11 +53,43 @@ function setProfileExpanded(isExpanded) {
 function setServiceOpen(itemToOpen) {
   serviceItems.forEach((item) => {
     const button = item.querySelector('.service-item__trigger');
+    const content = item.querySelector('.service-item__content');
     const isOpen = item === itemToOpen;
 
     item.classList.toggle('is-open', isOpen);
     if (button) {
       button.setAttribute('aria-expanded', String(isOpen));
+    }
+
+    if (content && mobileQuery.matches) {
+      content.style.maxHeight = isOpen ? `${content.scrollHeight}px` : '0px';
+    }
+  });
+}
+
+function resetServicePanelStyles() {
+  serviceItems.forEach((item) => {
+    const content = item.querySelector('.service-item__content');
+
+    if (content) {
+      content.style.maxHeight = '';
+    }
+  });
+}
+
+function refreshOpenServiceHeight() {
+  if (!mobileQuery.matches) {
+    return;
+  }
+
+  serviceItems.forEach((item) => {
+    if (!item.classList.contains('is-open')) {
+      return;
+    }
+
+    const content = item.querySelector('.service-item__content');
+    if (content) {
+      content.style.maxHeight = `${content.scrollHeight}px`;
     }
   });
 }
@@ -67,6 +99,7 @@ function syncMobileState(event) {
 
   if (!isMobile) {
     setProfileExpanded(true);
+    resetServicePanelStyles();
     serviceItems.forEach((item) => {
       item.classList.remove('is-open');
       const button = item.querySelector('.service-item__trigger');
@@ -112,4 +145,7 @@ syncMobileState(mobileQuery);
 syncFooterOffset();
 mobileQuery.addEventListener('change', syncMobileState);
 mobileQuery.addEventListener('change', syncFooterOffset);
-window.addEventListener('resize', syncFooterOffset);
+window.addEventListener('resize', () => {
+  syncFooterOffset();
+  refreshOpenServiceHeight();
+});
