@@ -32,7 +32,7 @@ body {
    NAVBAR
 =========================== */
 .navbar {
-  background-color: var(--bg);
+  background-color: #1B1B1B;
   padding: 20px 60px;
   display: flex;
   align-items: center;
