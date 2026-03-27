@@ -1,0 +1,356 @@
+/* ===========================
+   RESET & BASE
+=========================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #F0E5CF;
+  --navy: #003152;
+  --navy-light: rgba(0, 49, 82, 0.85);
+  --text-dark: #1a1a18;
+  --text-muted: #3C3C3A;
+  --divider: rgba(60, 60, 58, 0.3);
+  --font: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font);
+  background-color: var(--bg);
+  color: var(--text-dark);
+  min-height: 100vh;
+}
+
+/* ===========================
+   NAVBAR
+=========================== */
+.navbar {
+  background-color: var(--bg);
+  padding: 20px 60px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--divider);
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-badges {
+  display: flex;
+  gap: 6px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2.5px solid var(--text-dark);
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: var(--text-dark);
+  line-height: 1;
+}
+
+.navbar__tagline {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+}
+
+/* ===========================
+   MAIN LAYOUT
+=========================== */
+.main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  min-height: calc(100vh - 85px - 136px);
+}
+
+/* ===========================
+   PROFILE CARD (izquierda)
+=========================== */
+.profile-card {
+  background: linear-gradient(180deg, var(--navy) 0%, rgba(0, 49, 82, 0.85) 100%);
+  color: #ffffff;
+  padding: 48px 52px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.profile-card__name {
+  font-size: 2.6rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+.profile-card__titles {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.9);
+}
+
+.profile-card__photo-wrapper {
+  flex-shrink: 0;
+}
+
+.profile-card__photo {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  border: 3px solid rgba(255,255,255,0.25);
+  display: block;
+}
+
+/* Placeholder cuando no hay foto */
+.profile-card__photo[src="foto.jpg"] {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.profile-card__bio {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.88);
+}
+
+/* ===========================
+   SERVICIOS (derecha)
+=========================== */
+.services {
+  background-color: var(--bg);
+  padding: 48px 52px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.services__header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.services__icon {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--text-dark);
+  line-height: 1;
+}
+
+.services__title {
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: var(--text-dark);
+  line-height: 1.1;
+}
+
+.service-item {
+  padding-bottom: 18px;
+  margin-bottom: 4px;
+}
+
+.service-item__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.service-item__title.otros {
+  color: var(--navy);
+}
+
+.service-item__desc {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.service-item__divider {
+  border: none;
+  border-top: 1px solid var(--divider);
+  margin-top: 18px;
+}
+
+/* ===========================
+   CONTACTO
+=========================== */
+.contact {
+  background-color: var(--bg);
+  padding: 40px 60px 20px;
+}
+
+.contact__title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--text-dark);
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+.footer {
+  background-color: var(--navy);
+  height: 136px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+}
+
+.footer__social {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.footer__social-link:hover {
+  opacity: 0.7;
+}
+
+.footer__social-link svg {
+  width: 36px;
+  height: 36px;
+}
+
+.footer__contact {
+  text-align: right;
+  color: #ffffff;
+  font-size: 0.82rem;
+  line-height: 1.8;
+  font-weight: 500;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+/* ===========================
+   ANIMACIONES
+=========================== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 16px 24px;
+  }
+
+  .main {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-card {
+    padding: 36px 24px;
+  }
+
+  .profile-card__name {
+    font-size: 2rem;
+  }
+
+  .profile-card__photo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .services {
+    padding: 36px 24px;
+  }
+
+  .services__title {
+    font-size: 2rem;
+  }
+
+  .services__icon {
+    font-size: 2rem;
+  }
+
+  .contact {
+    padding: 32px 24px 16px;
+  }
+
+  .contact__title {
+    font-size: 1.8rem;
+  }
+
+  .footer {
+    flex-direction: column;
+    height: auto;
+    padding: 28px 24px;
+    gap: 20px;
+  }
+
+  .footer__contact {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .badge {
+    width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+  }
+
+  .profile-card__name {
+    font-size: 1.75rem;
+  }
+
+  .profile-card__top {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .profile-card__photo {
+    width: 110px;
+    height: 110px;
+  }
+}
