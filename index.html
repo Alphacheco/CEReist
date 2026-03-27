@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
 </head>
 <body>
 
@@ -37,12 +37,17 @@
           <img src="foto.jpg" alt="Emanuel Reist" class="profile-card__photo" />
         </div>
       </div>
-      <p class="profile-card__bio">
-        Mi nombre es Emanuel Reist, soy abogado de la Provincia de Entre Ríos, mediador, docente y Agente de la Propiedad Industrial. Me dedico a todo lo vinculado con la Propiedad Intelectual, haciendo registros de marcas y patentes ante el Instituto Nacional de la Propiedad Industrial como así también depósito en custodia de obras inéditas o no ante la Dirección Nacional de Derechos de Autor.
-      </p>
-      <p class="profile-card__bio">
-        Como abogado con 15 años de experiencia en, he acompañado a numerosos clientes en la protección de sus creaciones, asegurando que sus derechos queden debidamente resguardados. De esta manera, puedo guiar a mis clientes en cada paso del proceso, ofreciendo un asesoramiento claro y especializado.
-      </p>
+      <button class="profile-card__toggle" type="button" aria-expanded="false" aria-controls="profile-details">
+        <span class="profile-card__chevron" aria-hidden="true"></span>
+      </button>
+      <div class="profile-card__details" id="profile-details">
+        <p class="profile-card__bio">
+          Mi nombre es Emanuel Reist, soy abogado de la Provincia de Entre Ríos, mediador, docente y Agente de la Propiedad Industrial. Me dedico a todo lo vinculado con la Propiedad Intelectual, haciendo registros de marcas y patentes ante el Instituto Nacional de la Propiedad Industrial como así también depósito en custodia de obras inéditas o no ante la Dirección Nacional de Derechos de Autor.
+        </p>
+        <p class="profile-card__bio">
+          Como abogado con 15 años de experiencia, he acompañado a numerosos clientes en la protección de sus creaciones, asegurando que sus derechos queden debidamente resguardados. De esta manera, puedo guiar a mis clientes en cada paso del proceso, ofreciendo un asesoramiento claro y especializado.
+        </p>
+      </div>
     </section>
 
     <!-- RIGHT: Servicios -->
@@ -53,33 +58,56 @@
       </div>
 
       <div class="service-item">
-        <h3 class="service-item__title">Registro de Marcas</h3>
-        <p class="service-item__desc">El registro de marcas es un proceso legal mediante el cual se otorga un derecho exclusivo sobre un signo distintivo, como un nombre, logo o eslogan, que identifica productos o servicios en el mercado. Al registrarla, se protege la marca de usos no autorizados, asegurando la exclusividad en un territorio.</p>
-        <hr class="service-item__divider" />
+        <button class="service-item__trigger" type="button" aria-expanded="false" aria-controls="service-marcas">
+          <h3 class="service-item__title">Registro de Marcas</h3>
+          <span class="service-item__chevron" aria-hidden="true"></span>
+        </button>
+        <div class="service-item__content" id="service-marcas">
+          <p class="service-item__desc">El registro de marcas es un proceso legal mediante el cual se otorga un derecho exclusivo sobre un signo distintivo, como un nombre, logo o eslogan, que identifica productos o servicios en el mercado. Al registrarla, se protege la marca de usos no autorizados, asegurando la exclusividad en un territorio.</p>
+        </div>
       </div>
 
       <div class="service-item">
-        <h3 class="service-item__title">Registro de Patentes de Invención</h3>
-        <p class="service-item__desc">El registro de patentes de invención es el trámite que permite proteger una invención novedosa, otorgando a su creador derechos exclusivos de explotación durante un período determinado. Las patentes fomentan la innovación, ya que premian al inventor por su aporte técnico.</p>
-        <hr class="service-item__divider" />
+        <button class="service-item__trigger" type="button" aria-expanded="false" aria-controls="service-patentes">
+          <h3 class="service-item__title">Registro de Patentes de Invención</h3>
+          <span class="service-item__chevron" aria-hidden="true"></span>
+        </button>
+        <div class="service-item__content" id="service-patentes">
+          <p class="service-item__desc">El registro de patentes de invención es el trámite que permite proteger una invención novedosa, otorgando a su creador derechos exclusivos de explotación durante un período determinado. Las patentes fomentan la innovación, ya que premian al inventor por su aporte técnico.</p>
+        </div>
       </div>
 
       <div class="service-item">
-        <h3 class="service-item__title">Modelos de Utilidad</h3>
-        <p class="service-item__desc">Los modelos de utilidad son innovaciones menores que mejoran el funcionamiento o la forma de un objeto ya existente. A diferencia de las patentes, requieren menos requisitos de originalidad. Es una vía ágil para proteger mejoras prácticas.</p>
-        <hr class="service-item__divider" />
+        <button class="service-item__trigger" type="button" aria-expanded="false" aria-controls="service-modelos">
+          <h3 class="service-item__title">Modelos de Utilidad</h3>
+          <span class="service-item__chevron" aria-hidden="true"></span>
+        </button>
+        <div class="service-item__content" id="service-modelos">
+          <p class="service-item__desc">Los modelos de utilidad son innovaciones menores que mejoran el funcionamiento o la forma de un objeto ya existente. A diferencia de las patentes, requieren menos requisitos de originalidad. Es una vía ágil para proteger mejoras prácticas.</p>
+        </div>
       </div>
 
       <div class="service-item">
-        <h3 class="service-item__title">Diseños y Modelos Industriales</h3>
-        <p class="service-item__desc">Los diseños y modelos industriales se refieren a la apariencia estética de un producto, protegiendo su forma, color o diseño ornamental. Es un registro que evita copias o imitaciones de la estética de un producto.</p>
-        <hr class="service-item__divider" />
+        <button class="service-item__trigger" type="button" aria-expanded="false" aria-controls="service-disenos">
+          <h3 class="service-item__title">Diseños y Modelos Industriales</h3>
+          <span class="service-item__chevron" aria-hidden="true"></span>
+        </button>
+        <div class="service-item__content" id="service-disenos">
+          <p class="service-item__desc">Los diseños y modelos industriales se refieren a la apariencia estética de un producto, protegiendo su forma, color o diseño ornamental. Es un registro que evita copias o imitaciones de la estética de un producto.</p>
+        </div>
       </div>
 
-      <div class="service-item">
-        <h3 class="service-item__title otros">Otros</h3>
-        <p class="service-item__desc">Depósito en custodia de obras inéditas o publicadas ante la DNDA · Asesoramiento sobre políticas de privacidad en sitios web · Asesoramiento Civil y Comercial a empresas en general · Sucesiones · Divorcios</p>
+      <div class="service-item service-item--extra">
+        <button class="service-item__trigger" type="button" aria-expanded="false" aria-controls="service-otros">
+          <h3 class="service-item__title otros">Otros</h3>
+          <span class="service-item__chevron" aria-hidden="true"></span>
+        </button>
+        <div class="service-item__content" id="service-otros">
+          <p class="service-item__desc">Depósito en custodia de obras inéditas o publicadas ante la DNDA · Asesoramiento sobre políticas de privacidad en sitios web · Asesoramiento Civil y Comercial a empresas en general · Sucesiones · Divorcios</p>
+        </div>
       </div>
+
+      <p class="services__note">Es fundamental proteger las creaciones para fomentar la innovación, generar valor económico y asegurar que los creadores reciban reconocimiento y beneficios por su trabajo.</p>
     </section>
 
   </main>
@@ -105,7 +133,7 @@
     </div>
 
     <div class="footer__contact">
-      <p>Fleming 744 &nbsp; Paraná, Entre Ríos</p>
+      <a href="https://www.google.com/maps/place/Fleming+744,+Paraná,+Entre+Ríos" target="_blank" rel="noopener noreferrer"><img src="map.svg" alt="map"><p>Fleming 744  Paraná, Entre Ríos</p></a>
       <p>0343 4543443</p>
       <p>emanuelreist@gmail.com</p>
     </div>
