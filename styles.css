@@ -474,6 +474,10 @@ h6 {
     background: var(--bg);
   }
 
+  p {
+    font-size: 12px;
+  }
+
   .navbar {
     padding: 20px 0 28px;
     justify-content: center;
@@ -493,7 +497,7 @@ h6 {
   }
 
   .navbar__tagline {
-    font-size: 0.95rem;
+    font-size: 1.95rem;
     letter-spacing: 0;
     text-transform: none;
   }
