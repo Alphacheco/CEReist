@@ -26,6 +26,13 @@ const profileDetails = document.querySelector('.profile-card__details');
 const profilePhoto = document.querySelector('.profile-card__photo');
 const footer = document.querySelector('.footer');
 const serviceItems = Array.from(document.querySelectorAll('.service-item'));
+const servicesViewport = document.querySelector('.services__viewport');
+const servicesTrack = document.querySelector('.services__track');
+const servicesPrevButton = document.querySelector('.services__nav--prev');
+const servicesNextButton = document.querySelector('.services__nav--next');
+const servicesDots = document.querySelector('.services__dots');
+const cardsPerPage = 2;
+let serviceCarouselPage = 0;
 
 function syncFooterOffset() {
   if (!footer) {
@@ -33,6 +40,93 @@ function syncFooterOffset() {
   }
 
   document.documentElement.style.setProperty('--footer-offset', `${footer.offsetHeight}px`);
+}
+
+function getVisibleServiceItems() {
+  return serviceItems.filter((item) => window.getComputedStyle(item).display !== 'none');
+}
+
+function getServicePageCount() {
+  const visibleItems = getVisibleServiceItems();
+  return Math.max(1, Math.ceil(visibleItems.length / cardsPerPage));
+}
+
+function clampServiceCarouselPage() {
+  const maxPage = getServicePageCount() - 1;
+
+  if (serviceCarouselPage > maxPage) {
+    serviceCarouselPage = maxPage;
+  }
+}
+
+function renderServiceDots(totalPages) {
+  if (!servicesDots) {
+    return;
+  }
+
+  if (servicesDots.childElementCount !== totalPages) {
+    servicesDots.innerHTML = '';
+
+    for (let index = 0; index < totalPages; index += 1) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'services__dot';
+      dot.setAttribute('aria-label', `Ir a la pagina ${index + 1} de servicios`);
+      dot.addEventListener('click', () => {
+        serviceCarouselPage = index;
+        updateServiceCarousel();
+      });
+      servicesDots.appendChild(dot);
+    }
+  }
+
+  servicesDots.setAttribute('aria-hidden', String(totalPages <= 1));
+}
+
+function updateServiceCarousel() {
+  if (!servicesTrack || !servicesViewport) {
+    return;
+  }
+
+  const totalPages = getServicePageCount();
+  const hasMultiplePages = totalPages > 1;
+
+  clampServiceCarouselPage();
+
+  const viewportWidth = servicesViewport.getBoundingClientRect().width;
+  const styles = window.getComputedStyle(servicesTrack);
+  const gapValue = Number.parseFloat(styles.columnGap || styles.gap || '0') || 0;
+  const translateX = serviceCarouselPage * (viewportWidth + gapValue);
+
+  renderServiceDots(totalPages);
+
+  servicesTrack.style.transform = `translateX(-${translateX}px)`;
+
+  if (servicesDots) {
+    const dots = Array.from(servicesDots.querySelectorAll('.services__dot'));
+    dots.forEach((dot, index) => {
+      const isActive = index === serviceCarouselPage;
+      dot.classList.toggle('is-active', isActive);
+      dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+    });
+  }
+
+  if (servicesPrevButton) {
+    servicesPrevButton.disabled = !hasMultiplePages || serviceCarouselPage <= 0;
+  }
+
+  if (servicesNextButton) {
+    const maxPage = totalPages - 1;
+    servicesNextButton.disabled = !hasMultiplePages || serviceCarouselPage >= maxPage;
+  }
+}
+
+function moveServiceCarousel(direction) {
+  const maxPage = getServicePageCount() - 1;
+  const nextPage = serviceCarouselPage + direction;
+
+  serviceCarouselPage = Math.min(Math.max(nextPage, 0), maxPage);
+  updateServiceCarousel();
 }
 
 if (profilePhoto) {
@@ -146,6 +240,18 @@ if (profileToggle) {
   });
 }
 
+if (servicesPrevButton) {
+  servicesPrevButton.addEventListener('click', () => {
+    moveServiceCarousel(-1);
+  });
+}
+
+if (servicesNextButton) {
+  servicesNextButton.addEventListener('click', () => {
+    moveServiceCarousel(1);
+  });
+}
+
 serviceItems.forEach((item) => {
   const button = item.querySelector('.service-item__trigger');
 
@@ -165,10 +271,13 @@ serviceItems.forEach((item) => {
 
 syncMobileState(mobileQuery);
 syncFooterOffset();
+updateServiceCarousel();
 mobileQuery.addEventListener('change', syncMobileState);
 mobileQuery.addEventListener('change', syncFooterOffset);
+mobileQuery.addEventListener('change', updateServiceCarousel);
 window.addEventListener('resize', () => {
   syncFooterOffset();
   refreshProfileDetailsHeight();
   refreshOpenServiceHeight();
+  updateServiceCarousel();
 });

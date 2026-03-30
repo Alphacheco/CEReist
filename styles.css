@@ -16,6 +16,7 @@
   --divider: rgba(60, 60, 58, 0.3);
   --font: 'Archivo', sans-serif;
   --footer-offset: 100px;
+  --services-gap: 12px;
 }
 
 html {
@@ -208,6 +209,8 @@ h6 {
   font-size: clamp(0.84rem, 0.42vw + 0.72rem, 0.96rem);
   line-height: 1.7;
   color: rgba(255,255,255,0.88);
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 /* ===========================
@@ -218,7 +221,7 @@ h6 {
   padding: clamp(30px, 4vw, 48px) clamp(22px, 4.5vw, 52px);
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 12px;
   color: #1B1B1B !important;
 }
 
@@ -227,6 +230,85 @@ h6 {
   align-items: center;
   gap: clamp(10px, 1.6vw, 14px);
   margin-bottom: clamp(16px, 2.4vw, 28px);
+}
+
+.services__carousel {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: 12px;
+}
+
+.services__nav {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #FEFFEF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.services__nav:hover {
+  transform: scale(1.06);
+}
+
+.services__nav:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.services__viewport {
+  overflow: hidden;
+}
+
+.services__dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.services__dots:empty {
+  display: none;
+}
+
+.services__dot {
+  width: 10px;
+  height: 10px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 49, 82, 0.26);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.services__dot:hover {
+  transform: scale(1.14);
+}
+
+.services__dot.is-active {
+  background: var(--navy);
+  transform: scale(1.16);
+}
+
+.services__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  grid-template-rows: repeat(2, minmax(0, auto));
+  column-gap: var(--services-gap);
+  row-gap: var(--services-gap);
+  align-items: start;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
 .services__icon {
@@ -244,8 +326,12 @@ h6 {
 }
 
 .service-item {
-  border-top: 1px solid var(--divider);
-  padding: clamp(12px, 1.8vw, 18px) 0;
+  background: #FEFFEF;
+  border: 1px solid rgba(0, 49, 82, 0.14);
+  border-radius: 18px;
+  padding: clamp(12px, 1.8vw, 18px) 18px;
+  box-shadow: 0 10px 24px rgba(0, 49, 82, 0.08);
+  height: fit-content;
 }
 
 .service-item__trigger {
@@ -276,7 +362,9 @@ h6 {
   font-size: clamp(0.8rem, 0.3vw + 0.72rem, 0.9rem);
   line-height: 1.65;
   color: var(--text-muted);
-  margin-top: 8px;
+  margin-top: 10px;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .service-item__content {
@@ -291,12 +379,14 @@ h6 {
 }
 
 .services__note {
-  border-top: 1px solid var(--divider);
-  margin-top: 6px;
-  padding-top: clamp(12px, 1.8vw, 18px);
+  border-top: none;
+  margin-top: 8px;
+  padding-top: clamp(10px, 1.4vw, 16px);
   font-size: clamp(0.84rem, 0.35vw + 0.74rem, 0.94rem);
   line-height: 1.35;
   color: var(--text-muted);
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 /* ===========================
@@ -582,6 +672,23 @@ h6 {
 
   .services {
     padding: 26px 0 22px;
+    gap: 10px;
+  }
+
+  .services__dots {
+    margin-top: 6px;
+    gap: 8px;
+  }
+
+  .services__carousel {
+    grid-template-columns: 38px minmax(0, 1fr) 38px;
+    gap: 8px;
+  }
+
+  .services__nav {
+    width: 38px;
+    height: 38px;
+    font-size: 1.05rem;
   }
 
   .services__header {
@@ -600,11 +707,16 @@ h6 {
   }
 
   .service-item {
+    margin: 0;
     padding: 0;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 49, 82, 0.12);
+    box-shadow: 0 8px 18px rgba(0, 49, 82, 0.08);
+    overflow: hidden;
   }
 
   .service-item__trigger {
-    padding: 14px 10px;
+    padding: 14px 12px;
     cursor: pointer;
   }
 
@@ -627,14 +739,14 @@ h6 {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    padding: 0 10px;
+    padding: 0 12px;
     will-change: max-height, opacity;
     transition: max-height 0.38s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s ease, padding-bottom 0.38s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .js-ready .service-item.is-open .service-item__content {
     opacity: 1;
-    padding: 0 10px 14px;
+    padding: 0 12px 14px;
   }
 
   .js-ready .service-item.is-open .service-item__chevron {
@@ -654,7 +766,7 @@ h6 {
 
   .services__note {
     margin-top: 0;
-    padding: 16px 10px 0;
+    padding: 16px 14px 0;
     font-size: 0.72rem;
     line-height: 1.2;
   }
