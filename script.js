@@ -269,6 +269,36 @@ serviceItems.forEach((item) => {
   });
 });
 
+// Coin flip functionality
+const profileCoin = document.querySelector('#profileCoin');
+if (profileCoin) {
+  function flipCoin() {
+    const isFlipped = profileCoin.classList.contains('flipped');
+    
+    // Cambiar z-index a mitad de la animación (300ms de 600ms)
+    setTimeout(() => {
+      if (!isFlipped) {
+        const front = profileCoin.querySelector('.profile-card__coin-face--front');
+        const back = profileCoin.querySelector('.profile-card__coin-face--back');
+        front.style.zIndex = '1';
+        back.style.zIndex = '2';
+      } else {
+        const front = profileCoin.querySelector('.profile-card__coin-face--front');
+        const back = profileCoin.querySelector('.profile-card__coin-face--back');
+        front.style.zIndex = '2';
+        back.style.zIndex = '1';
+      }
+    }, 300);
+    
+    profileCoin.classList.toggle('flipped');
+  }
+  
+  profileCoin.addEventListener('click', flipCoin);
+  
+  // Auto flip every 2 seconds
+  setInterval(flipCoin, 2000);
+}
+
 syncMobileState(mobileQuery);
 syncFooterOffset();
 updateServiceCarousel();
