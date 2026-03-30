@@ -343,55 +343,20 @@ function renderMarcasDots(totalPages) {
 
 function updateMarcasCarousel() {
   if (!marcasTrack || !marcasViewport) return;
-
-  marcasPerPage = getMarcasPerPage();
-
-  const totalPages = getMarcasPageCount();
-  const maxPage = totalPages - 1;
-  
-  // Asegurar que la página actual esté dentro del rango válido
-  if (marcasPage > maxPage) {
-    marcasPage = maxPage;
-  }
-
-  const viewportWidth = marcasViewport.getBoundingClientRect().width;
-  const styles = window.getComputedStyle(marcasTrack);
-  const gapValue = Number.parseFloat(styles.columnGap || styles.gap || '0') || 0;
-  const translateX = marcasPage * (viewportWidth + gapValue);
-
-  marcasTrack.style.transform = `translateX(-${translateX}px)`;
-  
-  renderMarcasDots(totalPages);
-
-  const dots = Array.from(marcasDots.querySelectorAll('.marcas-carousel__dot'));
-  dots.forEach((dot, index) => {
-    const isActive = index === marcasPage;
-    dot.classList.toggle('is-active', isActive);
-    dot.setAttribute('aria-current', isActive ? 'true' : 'false');
-  });
-
-  if (marcasPrevButton) {
-    marcasPrevButton.disabled = marcasPage <= 0;
-  }
-
-  if (marcasNextButton) {
-    marcasNextButton.disabled = marcasPage >= maxPage;
-  }
+  // Animación CSS maneja el movimiento
 }
 
 function moveMarcasCarousel(direction) {
-  const maxPage = getMarcasPageCount() - 1;
-  const nextPage = marcasPage + direction;
-  marcasPage = Math.min(Math.max(nextPage, 0), maxPage);
-  updateMarcasCarousel();
+  // Función no utilizada (rotación automática por CSS)
+  return;
 }
 
 if (marcasPrevButton) {
-  marcasPrevButton.addEventListener('click', () => moveMarcasCarousel(-1));
+  marcasPrevButton.style.display = 'none';
 }
 
 if (marcasNextButton) {
-  marcasNextButton.addEventListener('click', () => moveMarcasCarousel(1));
+  marcasNextButton.style.display = 'none';
 }
 
 syncMobileState(mobileQuery);
