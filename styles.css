@@ -501,7 +501,7 @@ h6 {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-960px);
+    transform: translateX(-1540px);
   }
 }
 
