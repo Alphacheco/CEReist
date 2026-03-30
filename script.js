@@ -299,9 +299,105 @@ if (profileCoin) {
   setInterval(flipCoin, 2000);
 }
 
+// Marcas Carousel functionality
+const marcasViewport = document.querySelector('.marcas-carousel__viewport');
+const marcasTrack = document.querySelector('.marcas-carousel__track');
+const marcasPrevButton = document.querySelector('.marcas-carousel__nav--prev');
+const marcasNextButton = document.querySelector('.marcas-carousel__nav--next');
+const marcasDots = document.querySelector('.marcas-carousel__dots');
+const marcasItems = Array.from(document.querySelectorAll('.marcas-carousel__item'));
+let marcasPage = 0;
+let marcasPerPage = 4;
+
+function getMarcasPerPage() {
+  if (window.innerWidth <= 480) {
+    return 2;
+  } else if (window.innerWidth <= 900) {
+    return 3;
+  }
+  return 4;
+}
+
+function getMarcasPageCount() {
+  return Math.max(1, Math.ceil(marcasItems.length / marcasPerPage));
+}
+
+function renderMarcasDots(totalPages) {
+  if (!marcasDots) return;
+
+  if (marcasDots.childElementCount !== totalPages) {
+    marcasDots.innerHTML = '';
+    for (let index = 0; index < totalPages; index += 1) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'marcas-carousel__dot';
+      dot.setAttribute('aria-label', `Ir a la página ${index + 1} de marcas`);
+      dot.addEventListener('click', () => {
+        marcasPage = index;
+        updateMarcasCarousel();
+      });
+      marcasDots.appendChild(dot);
+    }
+  }
+}
+
+function updateMarcasCarousel() {
+  if (!marcasTrack || !marcasViewport) return;
+
+  marcasPerPage = getMarcasPerPage();
+
+  const totalPages = getMarcasPageCount();
+  const maxPage = totalPages - 1;
+  
+  // Asegurar que la página actual esté dentro del rango válido
+  if (marcasPage > maxPage) {
+    marcasPage = maxPage;
+  }
+
+  const viewportWidth = marcasViewport.getBoundingClientRect().width;
+  const styles = window.getComputedStyle(marcasTrack);
+  const gapValue = Number.parseFloat(styles.columnGap || styles.gap || '0') || 0;
+  const translateX = marcasPage * (viewportWidth + gapValue);
+
+  marcasTrack.style.transform = `translateX(-${translateX}px)`;
+  
+  renderMarcasDots(totalPages);
+
+  const dots = Array.from(marcasDots.querySelectorAll('.marcas-carousel__dot'));
+  dots.forEach((dot, index) => {
+    const isActive = index === marcasPage;
+    dot.classList.toggle('is-active', isActive);
+    dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+  });
+
+  if (marcasPrevButton) {
+    marcasPrevButton.disabled = marcasPage <= 0;
+  }
+
+  if (marcasNextButton) {
+    marcasNextButton.disabled = marcasPage >= maxPage;
+  }
+}
+
+function moveMarcasCarousel(direction) {
+  const maxPage = getMarcasPageCount() - 1;
+  const nextPage = marcasPage + direction;
+  marcasPage = Math.min(Math.max(nextPage, 0), maxPage);
+  updateMarcasCarousel();
+}
+
+if (marcasPrevButton) {
+  marcasPrevButton.addEventListener('click', () => moveMarcasCarousel(-1));
+}
+
+if (marcasNextButton) {
+  marcasNextButton.addEventListener('click', () => moveMarcasCarousel(1));
+}
+
 syncMobileState(mobileQuery);
 syncFooterOffset();
 updateServiceCarousel();
+updateMarcasCarousel();
 mobileQuery.addEventListener('change', syncMobileState);
 mobileQuery.addEventListener('change', syncFooterOffset);
 mobileQuery.addEventListener('change', updateServiceCarousel);
@@ -310,4 +406,5 @@ window.addEventListener('resize', () => {
   refreshProfileDetailsHeight();
   refreshOpenServiceHeight();
   updateServiceCarousel();
+  updateMarcasCarousel();
 });
