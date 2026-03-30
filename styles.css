@@ -394,7 +394,7 @@ h6 {
 =========================== */
 .footer {
   background-color: var(--navy);
-  height: 100px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -407,17 +407,17 @@ h6 {
 }
 
 .footer__headline {
-  font-size: clamp(1.3rem, 1.4vw + 0.85rem, 2rem);
+  font-size: clamp(1rem, 1vw + 0.65rem, 1.45rem);
   font-weight: 800;
   color: #ffffff;
   line-height: 1.1;
-  margin-right: 22px;
+  margin-right: 16px;
   white-space: nowrap;
 }
 
 .footer__social {
   display: flex;
-  gap: 24px;
+  gap: 16px;
   align-items: center;
 }
 
@@ -439,11 +439,17 @@ h6 {
   height: 40%;
 }
 
+.footer__social-icon {
+  width: 39px;
+  height: 39px;
+  display: block;
+}
+
 .footer__contact {
   text-align: right;
   color: #ffffff;
-  font-size: 0.82rem;
-  line-height: 1.8;
+  font-size: 0.74rem;
+  line-height: 1.35;
   font-weight: 500;
 }
 
@@ -808,6 +814,6 @@ h6 {
 }
 
 .footer__contact a img {
-  width: 20px;
-  height: 20px;
+  width: 21px;
+  height: 21px;
 }
