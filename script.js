@@ -31,7 +31,7 @@ const servicesTrack = document.querySelector('.services__track');
 const servicesPrevButton = document.querySelector('.services__nav--prev');
 const servicesNextButton = document.querySelector('.services__nav--next');
 const servicesDots = document.querySelector('.services__dots');
-const cardsPerPage = 2;
+const cardsPerPage = 4;
 let serviceCarouselPage = 0;
 
 function syncFooterOffset() {

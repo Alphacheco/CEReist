@@ -29,6 +29,7 @@ body {
   color: var(--text-dark);
   min-height: 100vh;
   padding-bottom: var(--footer-offset);
+  overflow-x: hidden;
 }
 
 h1,
@@ -44,7 +45,7 @@ h6 {
    NAVBAR
 =========================== */
 .navbar {
-  background-color: #1B1B1B;
+  background-color: #003152;
   padding: 20px 60px;
   display: flex;
   align-items: center;
@@ -153,7 +154,7 @@ h6 {
   width: min(36%, 190px);
   max-width: 190px;
   aspect-ratio: 1;
-  margin-right: clamp(0px, 2vw, 8%);
+  
   perspective: 1000px;
 }
 
@@ -359,7 +360,7 @@ h6 {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 100%;
-  grid-template-rows: repeat(2, minmax(0, auto));
+  grid-template-rows: repeat(4, minmax(0, auto));
   column-gap: var(--services-gap);
   row-gap: var(--services-gap);
   align-items: start;
@@ -437,7 +438,7 @@ h6 {
 .services__note {
   border-top: none;
   margin-top: 8px;
-  padding-top: clamp(10px, 1.4vw, 16px);
+  
   font-size: clamp(13.44px, 0.35vw + 11.84px, 15.04px);
   line-height: 1.35;
   color: var(--text-muted);
