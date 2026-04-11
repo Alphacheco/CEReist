@@ -268,8 +268,8 @@ function App() {
     <>
       <header className="navbar">
         <div className="navbar__logo">
-          <img src="/images/logo.svg" alt="Emanuel Reist - Servicios Juridicos" />
-          <span className="navbar__tagline">Servicios Juridicos</span>
+          <img src="/images/logo.svg" alt="Emanuel Reist - Servicios Jurídicos" />
+          <span className="navbar__tagline">Servicios Jurídicos</span>
         </div>
       </header>
 
@@ -278,7 +278,7 @@ function App() {
           <div className="profile-card__top">
             <div className="profile-card__text">
               <h1 className="profile-card__name">
-                Cesar Emanuel
+                César Emanuel
                 <br />
                 Reist
               </h1>
@@ -352,7 +352,7 @@ function App() {
 
         <section className="services">
           <div className="services__header">
-            <p className="services__eyebrow">Estudio juridico y propiedad industrial</p>
+            <p className="services__eyebrow">Estudio jurídico y propiedad industrial</p>
             <h2 className="services__title">Servicios que brindo</h2>
           </div>
 
@@ -447,7 +447,7 @@ function App() {
           </div>
 
           <section className="services__insight" aria-label="Importancia del registro">
-            <h3 className="services__insight-title">Por que es necesario registrar?</h3>
+            <h3 className="services__insight-title">¿Por qué es necesario registrar?</h3>
             <p className="services__note">
               En nuestro pais existen oficinas nacionales que gestionan el registro y control de marcas,
               patentes, obras ineditas, modelos de utilidad y modelos industriales. Para trabajar con ellas,
